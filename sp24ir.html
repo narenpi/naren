@@ -1,0 +1,337 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="" xml:lang="">
+<head>
+  <meta charset="utf-8" />
+  <meta name="generator" content="pandoc" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes" />
+  <meta name="author" content="Naren" />
+  <title>Spring 24 A bit about Spectral Sequences</title>
+  <style>
+    html {
+      color: #1a1a1a;
+      background-color: #fdfdfd;
+    }
+    body {
+      margin: 0 auto;
+      max-width: 36em;
+      padding-left: 50px;
+      padding-right: 50px;
+      padding-top: 50px;
+      padding-bottom: 50px;
+      hyphens: auto;
+      overflow-wrap: break-word;
+      text-rendering: optimizeLegibility;
+      font-kerning: normal;
+    }
+    @media (max-width: 600px) {
+      body {
+        font-size: 0.9em;
+        padding: 12px;
+      }
+      h1 {
+        font-size: 1.8em;
+      }
+    }
+    @media print {
+      html {
+        background-color: white;
+      }
+      body {
+        background-color: transparent;
+        color: black;
+        font-size: 12pt;
+      }
+      p, h2, h3 {
+        orphans: 3;
+        widows: 3;
+      }
+      h2, h3, h4 {
+        page-break-after: avoid;
+      }
+    }
+    p {
+      margin: 1em 0;
+    }
+    a {
+      color: #1a1a1a;
+    }
+    a:visited {
+      color: #1a1a1a;
+    }
+    img {
+      max-width: 100%;
+    }
+    svg {
+      height: auto;
+      max-width: 100%;
+    }
+    h1, h2, h3, h4, h5, h6 {
+      margin-top: 1.4em;
+    }
+    h5, h6 {
+      font-size: 1em;
+      font-style: italic;
+    }
+    h6 {
+      font-weight: normal;
+    }
+    ol, ul {
+      padding-left: 1.7em;
+      margin-top: 1em;
+    }
+    li > ol, li > ul {
+      margin-top: 0;
+    }
+    blockquote {
+      margin: 1em 0 1em 1.7em;
+      padding-left: 1em;
+      border-left: 2px solid #e6e6e6;
+      color: #606060;
+    }
+    code {
+      font-family: Menlo, Monaco, Consolas, 'Lucida Console', monospace;
+      font-size: 85%;
+      margin: 0;
+      hyphens: manual;
+    }
+    pre {
+      margin: 1em 0;
+      overflow: auto;
+    }
+    pre code {
+      padding: 0;
+      overflow: visible;
+      overflow-wrap: normal;
+    }
+    .sourceCode {
+     background-color: transparent;
+     overflow: visible;
+    }
+    hr {
+      background-color: #1a1a1a;
+      border: none;
+      height: 1px;
+      margin: 1em 0;
+    }
+    table {
+      margin: 1em 0;
+      border-collapse: collapse;
+      width: 100%;
+      overflow-x: auto;
+      display: block;
+      font-variant-numeric: lining-nums tabular-nums;
+    }
+    table caption {
+      margin-bottom: 0.75em;
+    }
+    tbody {
+      margin-top: 0.5em;
+      border-top: 1px solid #1a1a1a;
+      border-bottom: 1px solid #1a1a1a;
+    }
+    th {
+      border-top: 1px solid #1a1a1a;
+      padding: 0.25em 0.5em 0.25em 0.5em;
+    }
+    td {
+      padding: 0.125em 0.5em 0.25em 0.5em;
+    }
+    header {
+      margin-bottom: 4em;
+      text-align: center;
+    }
+    #TOC li {
+      list-style: none;
+    }
+    #TOC ul {
+      padding-left: 1.3em;
+    }
+    #TOC > ul {
+      padding-left: 0;
+    }
+    #TOC a:not(:hover) {
+      text-decoration: none;
+    }
+    code{white-space: pre-wrap;}
+    span.smallcaps{font-variant: small-caps;}
+    div.columns{display: flex; gap: min(4vw, 1.5em);}
+    div.column{flex: auto; overflow-x: auto;}
+    div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+    /* The extra [class] is a hack that increases specificity enough to
+       override a similar rule in reveal.js */
+    ul.task-list[class]{list-style: none;}
+    ul.task-list li input[type="checkbox"] {
+      font-size: inherit;
+      width: 0.8em;
+      margin: 0 0.8em 0.2em -1.6em;
+      vertical-align: middle;
+    }
+  </style>
+  <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+  <script
+  src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml-full.js"
+  type="text/javascript"></script>
+</head>
+<body>
+<header id="title-block-header">
+<h1 class="title">Spring 24<br />
+A bit about Spectral Sequences</h1>
+<p class="author">Naren</p>
+</header>
+<nav id="TOC" role="doc-toc">
+<ul>
+<li><a href="#week-5" id="toc-week-5">Week 5</a></li>
+<li><a href="#week-6" id="toc-week-6">Week 6</a></li>
+<li><a href="#week-7" id="toc-week-7">Week 7</a></li>
+</ul>
+</nav>
+<h1 id="week-5">Week 5</h1>
+<p><strong>Dual Steenrod Algebra</strong><br />
+<span class="math inline">\(\mathcal{A}^*:=A^{\vee }\)</span> is defined
+to be the dual Hopf algebra to <span
+class="math inline">\(\mathcal{A}\)</span>. <span
+class="math inline">\(\mathcal{A}\)</span> is cocommutative algebra, so
+<span class="math inline">\(\mathcal{A}_*\)</span> is commutative Hopf
+algebra.</p>
+<p>Define <span class="math inline">\(\xi_i\in \mathcal{A}^*\)</span> to
+be dual to <span class="math inline">\(\mathop{\mathrm{Sq}}^{2^{i-1}
+,\dots,2,1}\)</span>. Thus <span class="math inline">\(\deg
+(\xi_i)=2^i-1\)</span>.</p>
+<p>The dual Steenrod algebra <span
+class="math inline">\(\mathcal{A}_*\)</span> is a polynomial algebra,
+<span class="math display">\[\mathcal{A}_* \cong \mathbb{F}_2\left[z_1,
+z_2, \ldots\right],\]</span> where <span
+class="math inline">\(z_i\)</span> is dual to <span
+class="math inline">\(\mathop{\mathrm{Sq}}^{2^{i-1} ,\dots,2,1}\)</span>
+and has degree <span class="math inline">\(2^i-1\)</span>. The coproduct
+is given by <span class="math display">\[\Delta\left(z_n\right)=\sum_{0
+\leq k \leq n} z_{n-k}^{2^k} \otimes z_k\]</span> and <span
+class="math display">\[\chi\left(z_n\right)=\sum_{\alpha \in
+\operatorname{Comp}(n)} z_{a_1}^{2^{\sigma(1)}} \cdots
+z_{a_{\ell}(\alpha)}^{2^{\sigma(\ell(\alpha))}}\]</span> where <span
+class="math inline">\(\sigma(k)=\sum_{j&lt;k} a_j\)</span></p>
+<p><strong>cohomology of Hopf algebra</strong> let <span
+class="math inline">\(\mathcal{H}\)</span> be a Hopf algebra over a
+field <span class="math inline">\(k\)</span>. Define <span
+class="math display">\[H^n(\mathcal{H})=\mathrm{Ext
+}^n_{\mathcal{H}}(k,k)\]</span> We define <span
+class="math display">\[\mathcal{A}(n)_*=\mathcal{A}_*
+/\left(z_1^{2^{n+1}}, z_2^{2^n}, \ldots, z_{n+1}^2, z_{n+2},
+\ldots\right) \cong \frac{\mathbb{F}_2\left[z_1, \ldots,
+z_{n+1}\right]}{\left(z_1^{2^{n+1}}, z_2^{2^n}, \ldots, z_{n+1}^2\right)
+}\]</span>This is an algebra of dimension <span class="math inline">\(2
+\frac{(n+1)(n+2)}{2}\)</span>, with top degree element in degree <span
+class="math inline">\(2^{n+2}(n-1)+n+5\)</span>.</p>
+<p><span class="math inline">\(h_{i,n}\coloneqq \xi_i^{2^n}\)</span> The
+dual <span class="math inline">\(\mathcal{A}(n)\)</span> of <span
+class="math inline">\(\mathcal{A}(n)_*\)</span> is the subalgebra of
+<span class="math inline">\(\mathcal{A}\)</span> generated by <span
+class="math inline">\(\mathop{\mathrm{Sq}}^{1,2,4, \ldots,
+2^n}\)</span>.<a href="#fn1" class="footnote-ref" id="fnref1"
+role="doc-noteref"><sup>1</sup></a></p>
+<h1 id="week-6">Week 6</h1>
+<p>The dual to the steenrod algebra <span class="math inline">\(A^{\land
+} =\mathbb{F}_2[z_1,z_2,\dots   ]\)</span> where <span
+class="math inline">\(z_i\)</span> is dual to <span
+class="math inline">\(\mathop{\mathrm{Sq}}^{2^i-1,\dots,2,1}\)</span>.</p>
+<p>The quotient <span class="math display">\[A(0)^{\land}\coloneqq
+\frac{\mathcal{A}_*}{z_1^2,z_2,z_3,\dots}=\frac{\mathbb{F}_2[z_1]}{z_1^2}\]</span>.</p>
+<p><span class="math inline">\(\mathcal{A}(0)\)</span> or <span
+class="math inline">\(\mathcal{E}(0)\)</span> denote the dual of <span
+class="math inline">\(\mathcal{A}(0)_*\)</span> or <span
+class="math inline">\(\mathcal{E}(0)_*\)</span>.</p>
+<p>We have an inclusion <span
+class="math inline">\(\mathcal{A}(0)\hookrightarrow
+\mathcal{A}\)</span>, that realizes <span
+class="math inline">\(A(0)\)</span> as the exterior algebra generated by
+<span class="math inline">\(\mathop{\mathrm{Sq}}^1\)</span>.</p>
+<p><span class="math display">\[\mathcal{E}(1)_*=\frac{\mathcal{A}_*
+}{z_1^2,z_2^2,z_3,\dots}\cong E_{\mathbb{F}_2 }(z_1,z_2)\]</span>.</p>
+<p><span class="math inline">\(\mathcal{E}(1)\hookrightarrow
+\mathcal{A}\)</span>. The classes <span
+class="math inline">\(z_1,z_2,z_1z_2\)</span> in <span
+class="math inline">\(\mathcal{E}(1)_*\)</span> dualize to give classes
+<span
+class="math inline">\(\mathop{\mathrm{Sq}}^1,\mathop{\mathrm{Sq}}^{2,1 }
+,\mathop{\mathrm{Sq}}^3,\mathop{\mathrm{Sq}}^{3,1 }\)</span> in <span
+class="math inline">\(\mathcal{E}(1)\)</span>.</p>
+<p><span class="math inline">\(z_2^{\land } =\mathop{\mathrm{Sq}}^{2,1
+}\)</span> so <span class="math inline">\(\left\langle
+z_2,\mathop{\mathrm{Sq}}^{2,1 } \right\rangle =1\)</span> and <span
+class="math inline">\(\left\langle
+z_2,\mathop{\mathrm{Sq}}^3  \right\rangle =0\)</span>.</p>
+<p>Notation: <span class="math inline">\(Q_1=\mathop{\mathrm{Sq}}^{2,1 }
++\mathop{\mathrm{Sq}}^3, Q_0=\mathop{\mathrm{Sq}}^1\)</span>.</p>
+<p><span class="math display">\[\mathcal{E}(n)_*=\frac{\mathcal{A}_*
+}{z_1^2,z_2^2,\dots,z_{n+1 }^2,z_{n+2},\dots}\cong \otimes _{j=1 }^{n+1
+} \frac{\mathbb{F}_2 [z_j] }{z_j^2}\]</span> <span
+class="math inline">\(\mathcal{E}(n)\)</span> is exterior on primitives
+<span class="math inline">\(Q_0, \dots, Q_n\)</span>.</p>
+<p><span class="math display">\[\mathcal{A}(1)_*=\frac{\mathcal{A}_*
+}{z_1^4,z_2^2,z_3,z_4,\dots}\cong
+\frac{\mathbb{F}_2[z_1,z_2]}{z_1^4,z_2^2 }\]</span> <span
+class="math inline">\(\mathcal{A}(n)\)</span> is generated by <span
+class="math inline">\(\mathop{\mathrm{Sq}}^1,
+\dots,\mathop{\mathrm{Sq}}^{2^n }\)</span> subject to Adem’s
+relation.</p>
+<p><span
+class="math display">\[\mathcal{A}(n)_*=\frac{\mathcal{A}_*   }{z_1^{2^{n+1}
+},z_2^{2^n },\dots, z_{n+1 }^2, z_{n+2 },\dots  }\cong
+\frac{\mathbb{F}_2[z_1,\dots,z_{n+1 }]}{z_1^{2^{n+1} },z_2^{2^n },\dots,
+z_{n+1 }^2, z_{n+2 },\dots  }\]</span> This is an algebra of <span
+class="math inline">\(\dim 2^{\frac{(n+1)(n+2) }{2 }}\)</span>.</p>
+<p>The dual <span class="math inline">\(\mathcal{A}(n)\)</span> of <span
+class="math inline">\(\mathcal{A}(n)_*\)</span> is the subalgebra of
+<span class="math inline">\(\mathcal{A}\)</span> generated by <span
+class="math inline">\(\mathop{\mathrm{Sq}}^1,
+...\mathop{\mathrm{Sq}}^{2^n }\)</span>. It is only true that <span
+class="math inline">\(z_1^{2^n } ={(\mathop{\mathrm{Sq}}^{2^n })}^{\land
+}\)</span> but not for any <span
+class="math inline">\(z_1^k\)</span>.</p>
+<p><span class="math inline">\(z_n\in \mathcal{A}_*\)</span> gives rise
+to <span class="math inline">\(Q_{n-1}\)</span> primitive elements in
+<span class="math inline">\(\mathcal{A}^{2^n-1 }\)</span>.</p>
+<p><span class="math inline">\(H^1(\mathcal{A})\cong
+(Q(\mathcal{A}))^{\land } \cong P(\mathcal{A}^{\land } )\)</span></p>
+<p><span class="math inline">\(\mathcal{E}(n)\cong \otimes _{j=0 }^{n }
+E_{\mathbb{F}_2}(Q_0,\dots,Q_n)\)</span> <span
+class="math inline">\(v_i\)</span> correspond to cohomology class of
+<span class="math inline">\(Q_i\)</span>.</p>
+<p><span class="math inline">\(H^1(\mathcal{E}(n))\cong
+\mathbb{F}_2[v_0,\dots,v_n]\)</span> where <span
+class="math inline">\(v_i\in
+\mathop{\mathrm{Ext}}_{\mathcal{E}(n)}^{1,2^{i+1 } -1}\)</span></p>
+<p><span
+class="math inline">\(\mathcal{A}(n)=\frac{\mathbb{F}_2[\mathop{\mathrm{Sq}}^1,\dots,\mathop{\mathrm{Sq}}^{2^n
+} ]}{\text{Adem&#39;s relations }}\)</span> here <span
+class="math inline">\(h_i\)</span> correspond to cohomology class of
+<span class="math inline">\(\mathop{\mathrm{Sq}}^i\)</span>.</p>
+<p><span class="math inline">\(H^1(\mathcal{A}(n))\cong
+\mathbb{F}_2[h_0,\dots,h_n]\)</span> with <span
+class="math inline">\(h_i\in
+\mathop{\mathrm{Ext}}_{\mathcal{A}(n)}^{1,2^i}(\mathbb{F}_2,\mathbb{F}_2)\)</span></p>
+<h1 id="week-7">Week 7</h1>
+<p><strong>May’s spectral sequence</strong> There exists a spectral
+sequence <span
+class="math display">\[E_2^{*,*}=\mathop{\mathrm{Ext}}^{*,*}
+_{gr_I^*\mathcal{A}}(\mathbb{F}_2,\mathbb{F}_2)\implies  \mathop{\mathrm{Ext}}_{\mathcal{A}}^{*,*}(\mathbb{F}_2,\mathbb{F}_2)\]</span></p>
+<p>There is a expression for <span
+class="math inline">\(\mathop{\mathrm{Ext}}\)</span> in terms of <span
+class="math inline">\(H^*(\mathbb{F}_2[h_{i,j}]_{i\geq 1,j\geq
+0},d)\)</span>.</p>
+<p>All differential occur on even pages. <span
+class="math inline">\(h_{i,j }\)</span> ocome from elements <span
+class="math inline">\(z_i^{2^j } \in \mathcal{A}^{\land}\)</span>.</p>
+<section id="footnotes" class="footnotes footnotes-end-of-document"
+role="doc-endnotes">
+<hr />
+<ol>
+<li id="fn1"><p><a
+href="https://mathoverflow.net/questions/56255/duals-and-tensor-products">Dual
+-<br />
+Tensor Products</a><a href="#fnref1" class="footnote-back"
+role="doc-backlink">↩︎</a></p></li>
+</ol>
+</section>
+</body>
+</html>
